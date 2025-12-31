@@ -93,3 +93,7 @@ http://localhost:8080
 http://localhost:8080
 ```
 
+### 🧪 Ejecutar los tests
+```bash
+mvn test
+```
