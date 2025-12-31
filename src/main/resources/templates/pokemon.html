@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Pokémon</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Buscar Pokémon</h1>
+
+    <form method="get" action="/pokemon">
+        <input
+                type="text"
+                name="query"
+                placeholder="Nombre o ID (ej: pikachu o 25)"
+                required
+        />
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div th:if="${error != null}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+
+    <div th:if="${pokemon != null}" class="card">
+        <h2 th:text="${#strings.capitalize(pokemon.name)}"></h2>
+        <img
+                th:if="${pokemon.sprites != null}"
+                th:src="${pokemon.sprites.front_default}"
+                alt="Imagen del Pokémon"
+        />
+        <p>ID: <span th:text="${pokemon.id}"></span></p>
+        <p>Altura: <span th:text="${pokemon.height}"></span> dm</p>
+        <p>Peso: <span th:text="${pokemon.weight}"></span> hg</p>
+    </div>
+
+    <div th:if="${pokemon?.types != null}" class="types">
+        <strong>Tipos:</strong><br>
+
+        <span
+                th:each="t : ${pokemon.types}"
+                th:text="${t.type.name}"
+                class="type-badge">
+    </span>
+    </div>
+
+</div>
+</body>
+
+</html>
